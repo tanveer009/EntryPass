@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="ISO-8859-1">
+<title>Visitor Page</title>
+<script type="text/javascript" src="/js/app.js">
+	
+</script>
+<link rel="stylesheet" type="text/css" href="/css/app.css">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div>
+<div id="container">
+<form th:action="@{/rest/visitorui/find/all}" method="post">
+<input type="submit" value="GetAllVisitors">
+</form>
+</div>
+
+<div id="container">
+<form onsubmit="yourFunction()" method="post" id=visitorbyid>
+<input type="number" value="id" name=id>
+<input type="submit" value="GetVisitorById">
+</form>
+</div>
+
+<div id="container">
+<form th:action="@{/rest/visitorui/save}" th:object="${visitorDto}" method="post">
+<p>First Name: <input type="text" th:field="*{firstName}"/></p>
+
+<p>Last Name: <input type="text" th:field="*{lastName}"/></p>
+<p>Phone Number: <input type="text" th:field="*{phoneNumber}"/></p>
+<p>Email:<input type="text" th:field="*{emailAddress}"></p>
+<p> Purpose of Access:<input type="text" th:field="*{purposeOfAccess}"></p>
+<p>Address Type: <select th:field="${visitorAddressDto.addressType}">
+    <option th:value="Permanent" th:text="Permanent"></option>
+    <option th:value="Office" th:text="Office"></option>
+  </select></p>
+<p>Address Line: <input type="text" th:field="${visitorAddressDto.addressLine}"></p>
+<p>City: <input type="text" th:field="${visitorAddressDto.city}"></p>
+<p>State: <input type="text" th:field="${visitorAddressDto.state}"></p>
+<p>Country: <input type="text" th:field="${visitorAddressDto.country}"></p>
+<p><input type="submit" value="SaveVisitors"></p>
+</form>
+</div>
+
+</div>
+
+
+<form name="logoutForm" th:action="@{/logout}" method="post">
+     <p> <input type="submit" value="Sign Out"/></p>
+</form> 
+
+
+<form name="AdminForm" th:action="@{/admin}">
+     <p> <input type="submit" value="AdminPage"/></p>
+</form>
+
+</body>
+</html>

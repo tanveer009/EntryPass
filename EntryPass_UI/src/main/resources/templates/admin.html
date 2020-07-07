@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+     <meta charset="ISO-8859-1">
+    <title>Admin</title>
+    <script type="text/javascript">
+    function yourFunction(){
+        var action_src = "/rest/adminui/find/" + document.getElementsByName("id")[0].value;
+        var your_form = document.getElementById('your_form');
+        userbyid.action = action_src ;
+    }
+    </script>
+</head>
+<body>
+
+<h1>Welcome on User Page</h1>
+
+<form th:action="@{/rest/adminui/find/all}" method="post">
+<input type="submit" value="GetAllUsers">
+</form>
+
+<form onsubmit="yourFunction()" id=userbyid>
+<input type="number" value="id" name=id>
+<input type="submit" value="GetUserById">
+</form>
+
+<form th:action="@{/rest/adminui/save}" th:object="${userDto}" method="post">
+<p>Name: <input type="text" th:field="*{userName}"/></p>
+<p>Password: <input type="password" th:field="*{userPassword}"/></p>
+<p>Address Type: <select th:field="${roleDto.role}">
+    <option th:value="Admin" th:text="Admin"></option>
+    <option th:value="Manager" th:text="Manager"></option>
+  </select></p>
+<p><input type="submit" value="SaveUsers"></p>
+</form>
+
+
+<form name="logoutForm" th:action="@{/logout}" method="post">
+      <input type="submit" value="Sign Out"/>
+ </form> 
+
+
+</body>
+
+</html>
